@@ -1,5 +1,6 @@
 <?php
 require('conection.php');
+require('functionsUser.php');
 session_start();
 
 function checkReferer() {
@@ -15,6 +16,11 @@ function transition($path) {
 
   if ($path === '/login.php') {
     return 'login';
+  } elseif ($path === '/register.php') {
+    return 'register';
+  } elseif ($path === '/index.php' && $data['type'] === 'logout') {
+    logout();
+    return 'logout';
   } elseif ($path === '/index.php' && $data['type'] === 'delete') {
     deleteData($data['id']);
     return 'index';
@@ -76,4 +82,3 @@ function detail($id) {
 function index() {
   return $todos = selectAll();
 }
-?>

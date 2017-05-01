@@ -1,5 +1,6 @@
 <?php
   require('functions.php');
+  checkLogin();
   unsetSession();
 ?>
 <!DOCTYPE html>
@@ -10,7 +11,9 @@
 </head>
 <body>
   welcome hello world
-  <div><a href="new.php">
+  <p>hello <?php echo h($_SESSION['name']) ?></p>
+  <div>
+    <a href="new.php">
       <p>新規作成</p>
     </a>
   </div>
@@ -40,8 +43,9 @@
       <?php endforeach; ?>
     </table>
   </div>
-<!--   <div>
-    <?php var_dump($todo); ?>
-  </div> -->
+  <form action="store.php" method="POST">
+    <input type="hidden" name="type" value="logout">
+    <button type="submit">Logout</button>
+  </form>
 </body>
 </html>

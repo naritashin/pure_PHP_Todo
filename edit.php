@@ -1,5 +1,6 @@
 <?php
   require_once('functions.php');
+  checkLogin();
   setToken();
   $data = detail($_GET['id']);
 ?>

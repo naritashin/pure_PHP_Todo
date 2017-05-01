@@ -20,7 +20,7 @@ function selectUsersAll() {
   return $user;
 }
 
-// function getSelectUserNameDb($userName) {// userName有無確認用
+// function getSelectUserNameDb($userName) {// userNameかぶり防止用
 //   $dbh = userConnectPdo();
 //   $sql = 'SELECT userName FROM users WHERE userName = :userName';
 //   $stmt = $dbh->prepare($sql);
@@ -40,10 +40,11 @@ function getSelectPasswordDb($userName) {// password成否参照用
   return $userData['password'];
 }
 
-function insertUserDb($userData) {// user作成用
+function insertUserDb($name, $password) {// user作成用
   $dbh = userConnectPdo();
-  $sql = 'INSERT INTO users (userName) VALUES (:userName)';
+  $sql = 'INSERT INTO users (userName, password) VALUES (:name, :password)';
   $stmt = $dbh->prepare($sql);
-  $stmt->bindParam(':userName', $userData, PDO::PARAM_STR);
-  $stmt->excute();
+  $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+  $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+  $stmt->execute();
 }

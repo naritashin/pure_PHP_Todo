@@ -1,11 +1,13 @@
 <?php
 require('functions.php');
-require('functionsUser.php');
-// var_dump($_POST);
 $res = checkReferer();
-// var_dump($res);
+
 if ($res == 'login') {
-  checkLogin($_POST);
+  checkUser($_POST);
+} elseif ($res == 'register') {
+  createUser($_POST);
+} elseif ($res == 'logout') {
+  header('location: ./');
 } elseif ($res != 'back') {
   header('location: ./index.php');
 } elseif($res == 'index') {
