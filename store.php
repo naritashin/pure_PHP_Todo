@@ -3,11 +3,11 @@ require('functions.php');
 $res = checkReferer();
 
 if ($res == 'login') {
-  checkUser($_POST);
+  header('location: ./index.php');
 } elseif ($res == 'register') {
-  createUser($_POST);
+  header('location: ./login.php');
 } elseif ($res == 'logout') {
-  header('location: ./');
+  header('location: ./login.php');
 } elseif ($res != 'back') {
   header('location: ./index.php');
 } elseif($res == 'index') {

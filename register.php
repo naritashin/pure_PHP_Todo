@@ -1,5 +1,6 @@
 <?php
   require('functions.php');
+  setToken();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -14,25 +15,33 @@
       <p><?php echo $_SESSION['err'] ?></p>
       <?php endif; ?>
       <form action="store.php" method="POST">
-        <div class="form_userName">
-          <label for="userName">User Name</label>
+        <input type="hidden" name="token" value="<?php echo h($_SESSION['token']); ?>">
+        <div class="form_name">
+          <label for="name">User Name</label>
           <div>
-            <input type="text" name="userName" class="userName" required="required">
+            <input type="text" name="name" class="name" required="required" placeholder="半角英数字のみ使用可能">
           </div>
         </div>
         <div class="form_password">
           <label for="password">Password</label>
           <div>
-            <input type="password" name="password" class="password" required="required">
+            <input type="password" name="password" class="password" required="required" placeholder="４文字以上、半角英数字のみ使用可能">
+          </div>
+        </div>
+        <div class="confirmPassword">
+          <label for="confirmPassword">Passwordの確認</label>
+          <div>
+            <input type="password" name="confirmPassword" class="password" required="required">
           </div>
         </div>
         <div class="form_submit">
-          <button type="submit">Register</button>
+          <button type="submit">新規作成</button>
         </div>
       </form>
     </section>
     <p>
-      <a href="./login.php">Login</a>
+      <a href="./login.php">ログイン</a>
     </p>
+  <?php unsetSession(); ?>
   </body>
 </html>

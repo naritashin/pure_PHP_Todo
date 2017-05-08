@@ -17,6 +17,7 @@ function selectAll() {
   foreach($dbh->query($sql) as $row) {
     array_push($todo, $row);
   }
+
   return $todo;
 }
 
@@ -26,6 +27,7 @@ function getSelectData($id) {
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => (int)$id));
   $data = $stmt->fetch();
+
   return $data['todo'];
 }
 
@@ -53,5 +55,45 @@ function deleteDb($id) {
   $stmt = $dbh->prepare($sql);
   $stmt->bindParam(':deleted_at', $nowTime);
   $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+  $stmt->execute();
+}
+
+function selectUsersAll() {
+  $dbh = connectPdo();
+  $sql = 'SELECT * FROM users';
+  $user = array();
+  foreach($dbh->query($sql) as $row) {
+    array_push($user, $row);
+  }
+
+  return $user;
+}
+
+function getSelectUserNameDb($name) {// nameかぶり防止用
+  $dbh = connectPdo();
+  $sql = 'SELECT name FROM users WHERE name = :name';
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':name' => (string)$name));
+  $userData = $stmt->fetch();
+
+  return isset($userData['name']);
+}
+
+function getSelectPasswordDb($name) {// password成否参照用
+  $dbh = connectPdo();
+  $sql = 'SELECT password FROM users WHERE name = :name';
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':name' => (string)$name));
+  $userData = $stmt->fetch();
+
+  return $userData['password'];
+}
+
+function insertUserDb($name, $password) {// user作成用
+  $dbh = connectPdo();
+  $sql = 'INSERT INTO users (name, password) VALUES (:name, :password)';
+  $stmt = $dbh->prepare($sql);
+  $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+  $stmt->bindParam(':password', $password, PDO::PARAM_STR);
   $stmt->execute();
 }

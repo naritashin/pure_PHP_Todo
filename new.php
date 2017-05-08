@@ -14,7 +14,7 @@
     <p><?php echo $_SESSION['err'] ?></p>
   <?php endif; ?>
   <form action="store.php" method="POST">
-    <input type="hidden" name="token" value="<?php echo h($_SESSION['token']) ?>">
+    <input type="hidden" name="token" value="<?php echo h($_SESSION['token']); ?>">
     <input type="text" name="todo">
     <input type="submit" value="作成">
   </form>
