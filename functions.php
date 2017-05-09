@@ -23,7 +23,6 @@ function transition($path) {
     return checkUser($_POST);
   } elseif ($path === '/register.php') {
     return createUser($_POST);
-    return 'register';
   } elseif (!$res || !empty($_SESSION['err'])) {
     return 'back';
   } elseif ($path === '/new.php') {
