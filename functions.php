@@ -92,12 +92,11 @@ function checkLogin () {
 }
 
 function checkUser($userData) {
-  $name = $userData['name'];
+  $name = h($userData['name']);
   $password = getSelectPasswordDb($name);
   validatePassword($userData);
 
   if (password_verify($userData['password'], $password) && checkToken($userData['token'])) {
-    session_regenerate_id(TRUE);
     $_SESSION['name'] = $name;
     return 'login';
   } else {
@@ -112,10 +111,10 @@ function logout() {
 }
 
 function createUser($userData) {
-  $name = $userData['name'];
-  $password = password_hash($userData['password'], PASSWORD_DEFAULT);
+  $name = h($userData['name']);
+  $password = password_hash(h($userData['password']), PASSWORD_DEFAULT);
   validatePassword($userData);
-  confirmPassword($userData['password'], $userData['confirmPassword']);
+  confirmPassword(h($userData['password']), h($userData['confirmPassword']));
 
   if (!getSelectUserNameDb($name) && checkToken($userData['token'])) {
       insertUserDb($name, $password);
