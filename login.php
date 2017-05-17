@@ -12,10 +12,10 @@
     <section class="wrapper">
       <h2>ログイン</h2>
       <?php if(isset($_SESSION['err'])): ?>
-      <p><?php echo $_SESSION['err'] ?></p>
+        <p><?php echo $_SESSION['err'] ?></p>
       <?php endif; ?>
       <?php if(isset($_SESSION['register'])): ?>
-      <p><?php echo $_SESSION['register'] ?></p>
+        <p><?php echo $_SESSION['register'] ?></p>
       <?php endif; ?>
       <form action="store.php" method="POST">
         <input type="hidden" name="token" value="<?php echo h($_SESSION['token']); ?>">

@@ -12,7 +12,7 @@
     <section class="wrapper">
       <h2>新規登録</h2>
       <?php if(isset($_SESSION['err'])): ?>
-      <p><?php echo $_SESSION['err'] ?></p>
+        <p><?php echo $_SESSION['err'] ?></p>
       <?php endif; ?>
       <form action="store.php" method="POST">
         <input type="hidden" name="token" value="<?php echo h($_SESSION['token']); ?>">
